@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 # from django.http import HttpResponse
+from django.views import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Task
@@ -81,3 +82,9 @@ class DeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     context_object_name = 'task'
     success_url = reverse_lazy('tasks')
+
+
+# class PersonListView(View):
+#     def get(self, request):
+#         people = Person.objects.all()
+#         return render(request, 'basefile/birthdays.html', {'people': people})
