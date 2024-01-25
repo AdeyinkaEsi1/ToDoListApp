@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('basefile', '0001_initial'),
+        ('todolistapp', '0001_initial'),
     ]
 
     operations = [
