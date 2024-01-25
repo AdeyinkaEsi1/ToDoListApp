@@ -13,7 +13,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
 class RegisterPage(FormView):
-    template_name = 'basefile/register.html'
+    template_name = 'todolistapp/register.html'
     form_class = UserCreationForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('tasks')
@@ -30,7 +30,7 @@ class RegisterPage(FormView):
         return super(RegisterPage, self).get(*args, **kwargs)
 
 class CustomLoginView(LoginView):
-    template_name = 'basefile/login.html'
+    template_name = 'todolistapp/login.html'
     fields = '__all__'
     redirect_authenticated_user = True
 
