@@ -1,16 +1,19 @@
 from django.shortcuts import render, redirect
-# from django.http import HttpResponse
-from django.views import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Task
-# tt
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+
+
+
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy('login')
+
 
 class RegisterPage(FormView):
     template_name = 'todolistapp/register.html'
@@ -28,6 +31,7 @@ class RegisterPage(FormView):
         if self.request.user.is_authenticated:
             return redirect('tasks')
         return super(RegisterPage, self).get(*args, **kwargs)
+
 
 class CustomLoginView(LoginView):
     template_name = 'todolistapp/login.html'
@@ -84,8 +88,3 @@ class DeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = 'task'
     success_url = reverse_lazy('tasks')
 
-
-# class PersonListView(View):
-#     def get(self, request):
-#         people = Person.objects.all()
-#         return render(request, 'basefile/birthdays.html', {'people': people})
